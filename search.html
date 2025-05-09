@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🔍 Search Articles - NewsWise</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: linear-gradient(to bottom, #f9f9f9, #e0e0e0);
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .container {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 700px;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    .title {
+      font-size: 2.5rem;
+      color: #1a1aff;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .search-form {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .search-form input[type="text"] {
+      flex: 1 1 300px;
+      padding: 12px 20px;
+      border: 1px solid #ccc;
+      border-radius: 30px;
+      background: #f1f5f9;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+    .search-form input[type="text"]:focus {
+      border-color: #1a73e8;
+      outline: none;
+    }
+    .search-form button {
+      padding: 12px 20px;
+      background-color: #1a73e8;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .search-form button:hover {
+      background-color: #155ab6;
+      transform: translateY(-2px);
+    }
+    .results {
+      margin-top: 20px;
+    }
+    .results-title {
+      font-size: 1.8rem;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .article-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .article-item {
+      padding: 15px 0;
+      border-bottom: 1px solid #ddd;
+      transition: all 0.3s ease;
+    }
+    .article-item:last-child {
+      border-bottom: none;
+    }
+    .article-link {
+      text-decoration: none;
+      color: #333;
+      font-size: 1.25rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .article-link:hover {
+      color: #1a1aff;
+    }
+    .article-meta {
+      font-size: 0.95rem;
+      color: #555;
+      margin-top: 5px;
+    }
+    nav.nav {
+      margin-top: 30px;
+      text-align: center;
+    }
+    nav.nav ul {
+      list-style: none;
+      display: inline-flex;
+      gap: 20px;
+      padding: 0;
+    }
+    nav.nav ul li a {
+      text-decoration: none;
+      color: #1a73e8;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    nav.nav ul li a:hover {
+      text-decoration: underline;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">🔍 Search Articles</h1>
+
+    <form method="POST" action="{{ url_for('search') }}" class="search-form">
+      <input type="text" name="query" placeholder="Enter keyword..." required>
+      <button type="submit">🔍 Search</button>
+    </form>
+
+    {% if articles %}
+    <div class="results">
+      <h2 class="results-title">📰 Results:</h2>
+      <ul class="article-list">
+        {% for article in articles %}
+        <li class="article-item">
+          <a href="{{ url_for('view_article', article_id=article['id']) }}" class="article-link">
+            {{ article['title'] }}
+          </a>
+          <div class="article-meta">
+            Category: <strong>{{ article['category'] }}</strong> |
+            Similarity Score: <strong>{{ article['score'] }}</strong>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% else %}
+    <p style="text-align: center;">No articles found.</p>
+    {% endif %}
+
+    <nav class="nav">
+      <ul>
+        <li><a href="{{ url_for('dashboard') }}">🏠 Dashboard</a></li>
+        <li><a href="{{ url_for('logout') }}">🚪 Logout</a></li>
+      </ul>
+    </nav>
+  </div>
+</body>
+</html>

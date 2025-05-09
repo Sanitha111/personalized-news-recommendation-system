@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - NewsWise</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Choices.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: start;
+      min-height: 100vh;
+      color: #333;
+    }
+    .container {
+      background: #ffffff;
+      padding: 40px 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+      max-width: 600px;
+      width: 100%;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    .title {
+      font-size: 2.2rem;
+      color: #222;
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .form h2 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #1a73e8;
+      font-weight: 600;
+      text-align: center;
+    }
+    .form select {
+      width: 100%;
+      margin-bottom: 20px;
+      font-size: 1rem;
+    }
+    .form button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 8px;
+      background-color: #1a73e8;
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .form button:hover {
+      background-color: #155ab6;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    /* === Custom Choices Tag Styling === */
+    .choices__inner {
+      min-height: 48px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      background-color: #f7f9fc;
+    }
+
+    .choices__list--multiple .choices__item {
+      background-color: #e3f2fd;
+      border: 1px solid #90caf9;
+      color: #1a73e8;
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 5px 10px;
+      border-radius: 20px;
+      margin: 4px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Change remove button inside tag */
+    .choices__list--multiple .choices__item .choices__button {
+      color: #1a73e8;
+      margin-left: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">Welcome to Your News Hub!</h1>
+    <form method="POST" class="form">
+      <h2>Select News Categories</h2>
+      <select id="categories" name="categories" multiple>
+        <option value="Politics">Politics</option>
+        <option value="India">India</option>
+        <option value="Health">Health</option>
+        <option value="Entertainment">Entertainment</option>
+        <option value="World">World</option>
+        <option value="Business">Business</option>
+      </select>
+      <button type="submit">Save Preferences</button>
+    </form>
+  </div>
+
+  <!-- Choices.js JS -->
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+  
+  <script>
+    const choices = new Choices('#categories', {
+      removeItemButton: true,
+      searchEnabled: true,
+      placeholder: true,
+      placeholderValue: 'Select categories',
+      searchPlaceholderValue: 'Search categories'
+    });
+  </script>
+</body>
+</html>

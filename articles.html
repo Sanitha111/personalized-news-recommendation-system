@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalized News - NewsWise</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(to bottom, #f9f9f9, #e0e0e0);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            color: #1a1aff;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .article-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .article-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #ddd;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .article-item:last-child {
+            border-bottom: none;
+        }
+
+        .article-link {
+            text-decoration: none;
+            color: #333;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .article-link::before {
+            content: "📰";
+            font-size: 1.2rem;
+        }
+
+        .article-link:hover {
+            color: #1a1aff;
+            font-weight: 600;
+            transform: translateX(5px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Curated Just for You!</h1>
+        <ul class="article-list">
+            {% for article in articles %}
+            <li class="article-item">
+                <a href="{{ url_for('view_article', article_id=article['id']) }}" class="article-link">
+                    {{ article['title'] }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - NewsWise</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: linear-gradient(to bottom, #f9f9f9, #e0e0e0);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      color: #333;
+    }
+    .container {
+      background: #ffffff;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 500px;
+      animation: fadeIn 0.5s ease-in-out;
+      text-align: center;
+    }
+    .title {
+      font-size: 2rem;
+      color: #1a73e8;
+      font-weight: 700;
+      margin-bottom: 30px;
+    }
+    .form {
+      width: 100%;
+    }
+    .form label {
+      display: block;
+      text-align: left;
+      margin-bottom: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .form input[type="text"],
+    .form input[type="email"],
+    .form input[type="password"] {
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 30px;
+      font-size: 1rem;
+      background: #f1f5f9;
+      transition: border-color 0.3s;
+    }
+    .form input[type="text"]:focus,
+    .form input[type="email"]:focus,
+    .form input[type="password"]:focus {
+      border-color: #1a73e8;
+      outline: none;
+    }
+    .form button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 30px;
+      background-color: #1a73e8;
+      color: #fff;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .form button:hover {
+      background-color: #155ab6;
+      transform: translateY(-2px);
+    }
+    .error {
+      color: red;
+      font-size: 1rem;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">📝 Create Your Account</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="error">
+          {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    <form method="POST" class="form">
+      <label>👤 Username:
+        <input type="text" name="username" placeholder="Enter your username" required>
+      </label>
+      <label>📧 Email:
+        <input type="email" name="email" placeholder="Enter your email" required>
+      </label>
+      <label>🔒 Password:
+        <input type="password" name="password" placeholder="Enter your password" required>
+      </label>
+      <button type="submit">📝 Register</button>
+    </form>
+  </div>
+</body>
+</html>
